@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './Navbar.css'
 
 const Navbar = () => {
   return (
-
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
       </div>
-      <div className="gap-6 mr-8">
-        <Link to='/myTask'>My Task</Link>
-        <Link to='/addTask'>Add Task</Link>
-        <Link to='completeTask'>Complete Task</Link>
+      <div className=" nav-link mr-12 lg:block md:block hidden">
+        
+        <Link className="ml-4" to="/myTask">My Task</Link>
+        <Link className="ml-4" to="/addTask">Add Task</Link>
+        <Link className="ml-4" to="completeTask">Complete Task</Link>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
@@ -30,6 +31,19 @@ const Navbar = () => {
                 <span className="badge">New</span>
               </Link>
             </li>
+
+            <div className="lg:hidden md:hidden">
+              <li>
+                <Link to="/myTask">My Task</Link>
+              </li>
+              <li>
+                <Link to="/addTask">Add Task</Link>
+              </li>
+              <li>
+                <Link to="completeTask">Complete Task</Link>
+              </li>
+            </div>
+
             <li>
               <Link>Settings</Link>
             </li>
