@@ -13,6 +13,7 @@ const Navbar = () => {
         <Link className="ml-4" to="/myTask">My Task</Link>
         <Link className="ml-4" to="/addTask">Add Task</Link>
         <Link className="ml-4" to="completeTask">Complete Task</Link>
+        <Link className="ml-4" to="register">Register</Link>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
