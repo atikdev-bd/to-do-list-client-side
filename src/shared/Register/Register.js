@@ -21,7 +21,7 @@ const Register = () => {
             navigate('/')
           const user = result.user;
           handleUpdateProfile(name);
-          console.log(user);
+         
         })
         .catch((err) => console.error(err));
 
@@ -33,7 +33,7 @@ const Register = () => {
         
             userUpdateProfile(profile)
               .then((result) => {
-                console.log(result.user);
+               
 
                navigate('/')
 

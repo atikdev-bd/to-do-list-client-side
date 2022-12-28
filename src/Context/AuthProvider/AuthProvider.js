@@ -1,48 +1,74 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, useState } from "react";
 
-import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithPopup, updateProfile} from 'firebase/auth'
-import { app } from '../../Firebase/Firebase.config';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
+
+import { app } from "../../Firebase/Firebase.config";
+
+export const AuthContext = createContext();
+const auth = getAuth(app);
 
 
 
+const AuthProvider = ({ children }) => {
 
-const auth = getAuth(app)
-
-const provider = new GoogleAuthProvider()
-
-export const AuthContext = createContext()
+    const [user, setUser] = useState(null)
 
 
-///create user email and password///
+  const provider = new GoogleAuthProvider();
 
-const createUser = (email,password)=>{
+  ///create user email and password///
 
-    return createUserWithEmailAndPassword(auth, email, password)
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth,email, password);
+  };
 
-}
-
-//update profile///
-const userUpdateProfile = (profile) => {
+  //update profile///
+  const userUpdateProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
 
   ///handle google login///
 
   const googleLogin = () => {
-   
     return signInWithPopup(auth, provider);
   };
 
-const info = {createUser,userUpdateProfile,googleLogin} 
+  
 
-const AuthProvider = ({children}) => {
-    return (
-        <div>
-            <AuthContext.Provider value={info}>
-                {children}
-            </AuthContext.Provider>
-        </div>
-    );
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+
+        setUser(currentUser)
+        console.log(currentUser)
+      
+    });
+    return () => unsubscribe();
+  }, []);
+
+
+  const handleLogOut = ()=>{
+    return signOut(auth).then(res =>{
+
+    }).then(error=>{console.log()})
+  }
+
+ 
+  const info = { createUser, userUpdateProfile, googleLogin,user ,handleLogOut};
+
+  return (
+    <div>
+      <AuthContext.Provider value={info}>{children}</AuthContext.Provider>
+    </div>
+  );
 };
 
 export default AuthProvider;

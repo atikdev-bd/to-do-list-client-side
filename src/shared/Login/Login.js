@@ -18,7 +18,7 @@ const Login = () => {
 
     loginUserWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result.user);
+      
         toast.success("Login Successfully!");
       })
       .catch((error) => {
@@ -46,7 +46,7 @@ const Login = () => {
         const currentUser = {
           email: user?.email,
         };
-        console.log(currentUser);
+       
 
       })
       .catch((error) => toast.error(error.message));

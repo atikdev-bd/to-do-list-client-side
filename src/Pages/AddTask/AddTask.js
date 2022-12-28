@@ -7,7 +7,7 @@ const AddTask = () => {
   const { register, handleSubmit, reset  } = useForm();
 
   const onSubmit = data => {
-    console.log(data);
+   
     fetch('http://localhost:5000/task', {
         method: 'POST',
         headers: {
@@ -17,7 +17,7 @@ const AddTask = () => {
     })
         .then(res => res.json())
         .then(result => {
-            console.log(result);
+            
             if (result) {
                 toast('New Todo added successfully!')
                 reset();
@@ -53,7 +53,7 @@ const AddTask = () => {
                 <span className="label-text">Day & Time</span>
               </label>
               <input
-              {...register('date-time')}
+              {...register('dateTime')}
                  name='date-time'
                 type="text"
                 placeholder="Select day and time"
