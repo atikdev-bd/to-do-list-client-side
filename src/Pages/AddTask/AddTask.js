@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import img from "../../Assets/img/toDoListPhoto.png";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const AddTask = () => {
+
+  const {user}= useContext(AuthContext)
   const { register, handleSubmit, reset  } = useForm();
 
+  const email = user?.email
+
   const onSubmit = data => {
+
+    const info = {...data, email}
+  
+
+
    
     fetch('http://localhost:5000/task', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(info)
     })
         .then(res => res.json())
         .then(result => {
@@ -54,7 +64,7 @@ const AddTask = () => {
               </label>
               <input
               {...register('dateTime')}
-                 name='date-time'
+                 name='dateTime'
                 type="text"
                 placeholder="Select day and time"
                 className="input input-bordered rounded-none"

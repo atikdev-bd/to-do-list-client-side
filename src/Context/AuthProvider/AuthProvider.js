@@ -19,6 +19,11 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
 
+    const [task, setTask] =useState(null)
+   
+
+    const [loading , setLoading] = useState(false)
+
     const [user, setUser] = useState(null)
 
 
@@ -41,6 +46,9 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+
+
+
   
 
 
@@ -48,7 +56,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 
         setUser(currentUser)
-        console.log(currentUser)
+       
       
     });
     return () => unsubscribe();
@@ -58,11 +66,11 @@ const AuthProvider = ({ children }) => {
   const handleLogOut = ()=>{
     return signOut(auth).then(res =>{
 
-    }).then(error=>{console.log()})
+    }).then(error=>{})
   }
 
  
-  const info = { createUser, userUpdateProfile, googleLogin,user ,handleLogOut};
+  const info = { createUser, userUpdateProfile,setLoading, googleLogin,user ,handleLogOut,loading,setTask,task};
 
   return (
     <div>
