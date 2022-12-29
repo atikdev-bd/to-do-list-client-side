@@ -9,12 +9,12 @@ const TaskModal = () => {
 
   const [updateData, setUpdateData] = useState({});
 
-  console.log(updateData);
+
 
   const { register, handleSubmit } = useForm();
 
   const handleUpdate = (id) => {
-    console.log(id);
+   
     fetch(`http://localhost:5000/task/${id}`, {
       method: "PATCH",
       headers: {

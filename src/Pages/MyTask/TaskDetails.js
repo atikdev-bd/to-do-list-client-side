@@ -3,11 +3,12 @@ import { toast } from "react-hot-toast";
 import editIcon from "../../Assets/svgIcon/icons8-edit.svg";
 import DeleteIcon from "../../Assets/svgIcon/icons8-trash.svg";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import Loader from "../../Loader/Loader";
 import TaskModal from "../TaskModal/TaskModal";
 
 const TaskDetails = ({ task, refetch }) => {
   
-const {setTask} = useContext(AuthContext)
+const {setTask, loading} = useContext(AuthContext)
 
   const handleDelete = (id) => {
   
@@ -34,6 +35,10 @@ const {setTask} = useContext(AuthContext)
 
 
 
+  }
+
+  if(loading){
+    return <Loader></Loader>
   }
 
   return <div>
